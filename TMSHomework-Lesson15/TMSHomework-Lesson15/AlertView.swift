@@ -75,11 +75,8 @@ class AlertView: UIView {
     }
 
     @objc func okButtonTapped() {
-        let view = superview!.subviews.first { view in
-            view is CatView
-        }
-
-        view?.isHidden = true
+        let catView = superview!.subviews.first { $0 is CatView } as? CatView
+        catView?.catImage.image = UIImage(named: "One of them")
 
         isHidden = true
     }

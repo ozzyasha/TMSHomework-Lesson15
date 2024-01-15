@@ -22,7 +22,7 @@ class CatView: UIView {
     private func setupCatView() {
         catImage.frame = CGRect(x: 0, y: 0, width: frame.width, height: frame.height)
         catImage.contentMode = .scaleAspectFit
-        catImage.image = UIImage(systemName: "cat.fill")
+        catImage.image = UIImage(named: "Two of them")
         catImage.tintColor = .black
 
         addSubview(catImage)

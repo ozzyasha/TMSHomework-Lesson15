@@ -33,8 +33,8 @@ class ViewController: UIViewController {
     }
 
     private func setupCatViewFrame() {
-        let catViewWidth: CGFloat = 150
-        let catViewHeight: CGFloat = 150
+        let catViewWidth: CGFloat = 250
+        let catViewHeight: CGFloat = 250
         let centerX = view.frame.maxX / 2 - catViewWidth / 2
         let cat = CatView(frame: CGRect(x: centerX, y: view.frame.minY + 70, width: catViewWidth, height: catViewHeight))
 
@@ -80,10 +80,8 @@ class ViewController: UIViewController {
     }
 
     @objc func showButtonTapped() {
-        let view = self.view.subviews.first { view in
-            view is CatView
-        }
-        view?.isHidden = false
+        let catView = view.subviews.first { $0 is CatView } as? CatView
+        catView?.catImage.image = UIImage(named: "Two of them")
     }
 }
 
