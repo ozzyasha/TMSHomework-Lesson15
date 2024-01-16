@@ -15,21 +15,9 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .systemGray5
 
-        setupAlertViewFrame()
         setupCatViewFrame()
         setupCatButtons(button: deleteCatButton)
         setupCatButtons(button: showCatButton)
-    }
-
-    private func setupAlertViewFrame() {
-        let alertViewWidth: CGFloat = 270
-        let alertViewHeight: CGFloat = 240
-        let centerX = view.frame.maxX / 2 - alertViewWidth / 2
-        let centerY = view.frame.maxY / 2 - alertViewHeight / 2
-
-        let alertView = AlertView(frame: CGRect(x: centerX, y: centerY, width: alertViewWidth, height: alertViewHeight))
-
-        view.addSubview(alertView)
     }
 
     private func setupCatViewFrame() {
@@ -73,10 +61,24 @@ class ViewController: UIViewController {
     }
 
     @objc func deleteButtonTapped() {
-        let view = self.view.subviews.first { view in
-            view is AlertView
+        let alertViewWidth: CGFloat = 270
+        let alertViewHeight: CGFloat = 240
+        let centerX = view.center.x - alertViewWidth / 2
+        let alertY = view.frame.minY - alertViewHeight
+        let alertView = AlertView(frame: CGRect(x: centerX, y: alertY, width: alertViewWidth, height: alertViewHeight))
+
+        if view.subviews.firstIndex(where: { $0 is AlertView }) == nil {
+            view.addSubview(alertView)
         }
-        view?.isHidden = false
+
+        UIView.animate(withDuration: 1.5,
+                       delay: 0.0,
+                       usingSpringWithDamping: 0.3,
+                       initialSpringVelocity: 0.0,
+                       options: [],
+                       animations: {
+                           alertView.center = self.view.center
+                       }, completion: nil)
     }
 
     @objc func showButtonTapped() {
