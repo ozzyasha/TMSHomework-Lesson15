@@ -16,7 +16,6 @@ class AlertView: UIView {
         super.init(frame: frame)
 
         setupAlertView()
-        isHidden = true
     }
 
     required init?(coder: NSCoder) {
@@ -71,13 +70,13 @@ class AlertView: UIView {
     }
 
     @objc func cancelButtonTapped() {
-        isHidden = true
+        removeFromSuperview()
     }
 
     @objc func okButtonTapped() {
         let catView = superview!.subviews.first { $0 is CatView } as? CatView
         catView?.catImage.image = UIImage(named: "One of them")
 
-        isHidden = true
+        removeFromSuperview()
     }
 }
